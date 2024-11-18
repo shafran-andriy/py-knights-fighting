@@ -13,4 +13,3 @@ ApplyPotion.apply_potion()
 battle = Battle.battle(KNIGHTS)
 
 print(battle)
-

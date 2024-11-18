@@ -4,18 +4,6 @@ from app.knights.knights import lancelot, mordred, arthur, red_knight
 # from app.knights.battle import Battle
 
 
-# # apply weapon
-# ApplyWeapon.apply_weapon()
-#
-# # apply potion if exist
-# ApplyPotion.apply_potion()
-#
-# # # BATTLE:
-# battle = Battle.battle(KNIGHTS)
-#
-# print(battle)
-
-
 def battle(knights_config: dict) -> dict:
     # apply weapon
     ApplyWeapon.apply_weapon()

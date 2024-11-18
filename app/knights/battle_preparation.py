@@ -8,7 +8,8 @@ class ApplyWeapon:
         lancelot.power += KNIGHTS.get("lancelot").get("weapon").get("power")
         arthur.power += KNIGHTS.get("arthur").get("weapon").get("power")
         mordred.power += KNIGHTS.get("mordred").get("weapon").get("power")
-        red_knight.power += KNIGHTS.get("red_knight").get("weapon").get("power")
+        red_knight.power += (KNIGHTS.get("red_knight")
+                             .get("weapon").get("power"))
 
 
 class ApplyPotion:
@@ -18,8 +19,10 @@ class ApplyPotion:
         for knight in [lancelot, arthur, mordred, red_knight]:
             if knight.potion is not None:
                 if knight.power in knight.potion.get("effect"):
-                    knight.power += knight.potion.get("effect").get("power")
+                    knight.power += (knight.potion.get("effect")
+                                     .get("power"))
                 if knight.protection in knight.potion.get("effect"):
-                    knight.protection += knight.potion.get("effect").get("protection")
+                    knight.protection += (knight.potion.
+                                          get("effect").get("protection"))
                 if knight.hp in knight.potion.get("effect"):
                     knight.hp += knight.potion.get("effect").get("hp")

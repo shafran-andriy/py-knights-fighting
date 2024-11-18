@@ -1,5 +1,4 @@
 from app.knights.knights import lancelot, mordred, arthur, red_knight
-from app.config.config import KNIGHTS
 
 
 # BATTLE:

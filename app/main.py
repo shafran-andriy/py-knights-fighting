@@ -1,7 +1,7 @@
 from app.config.config import KNIGHTS
-from app.knights.knights import lancelot, mordred, arthur, red_knight
 from app.knights.battle_preparation import ApplyWeapon, ApplyPotion
 from app.knights.battle import Battle
+
 
 # apply weapon
 ApplyWeapon.apply_weapon()

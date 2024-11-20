@@ -28,8 +28,11 @@ class Knight:
         # apply potion if exist
         if self.potion is not None:
             if "power" in self.potion.get("effect").keys():
-                self.power += (self.potion.get("effect").get("power"))
+                self.power += (self.potion.get("effect")
+                               .get("power"))
             if "protection" in self.potion.get("effect").keys():
-                self.protection += (self.potion.get("effect").get("protection"))
+                self.protection += (self.potion.get("effect")
+                                    .get("protection"))
             if "hp" in self.potion.get("effect").keys():
-                self.hp = self.hp + self.potion.get("effect").get("hp")
+                self.hp = (self.hp + self.potion.get("effect")
+                           .get("hp"))

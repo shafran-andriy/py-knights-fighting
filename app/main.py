@@ -1,45 +1,80 @@
 from app.config.config import KNIGHTS
-from app.knights.battle_preparation import ApplyWeapon, ApplyPotion
-from app.knights.knights import lancelot, mordred, arthur, red_knight
-# from app.knights.battle import Battle
+from app.knights.battle_preparation import Knight
+from app.knights.battle import fight
 
 
 def battle(knights_config: dict) -> dict:
-    # apply weapon
-    ApplyWeapon.apply_weapon()
+    lancelot = Knight(
+        name=knights_config.get("lancelot").get("name").lower(),
+        power=knights_config.get("lancelot").get("power"),
+        hp=knights_config.get("lancelot").get("hp"),
+        armour=knights_config.get("lancelot").get("armour"),
+        weapon=knights_config.get("lancelot").get("weapon"),
+        potion=knights_config.get("lancelot").get("potion"),
+        protection=sum(
+            [protect.get("protection")
+             for protect in knights_config.get("lancelot").get("armour")]
+        )
+    )
 
-    # apply potion if exist
-    ApplyPotion.apply_potion()
+    arthur = Knight(
+        name=knights_config.get("arthur").get("name").lower(),
+        power=knights_config.get("arthur").get("power"),
+        hp=knights_config.get("arthur").get("hp"),
+        armour=knights_config.get("arthur").get("armour"),
+        weapon=knights_config.get("arthur").get("weapon"),
+        potion=knights_config.get("arthur").get("potion"),
+        protection=sum(
+            [protect.get("protection")
+             for protect in knights_config.get("arthur").get("armour")]
+        )
+    )
+
+    mordred = Knight(
+        name=knights_config.get("mordred").get("name").lower(),
+        power=knights_config.get("mordred").get("power"),
+        hp=knights_config.get("mordred").get("hp"),
+        armour=knights_config.get("mordred").get("armour"),
+        weapon=knights_config.get("mordred").get("weapon"),
+        potion=knights_config.get("mordred").get("potion"),
+        protection=sum(
+            [protect.get("protection")
+             for protect in knights_config.get("mordred").get("armour")]
+        )
+    )
+
+    red_knight = Knight(
+        name=knights_config.get("red_knight").get("name").lower(),
+        power=knights_config.get("red_knight").get("power"),
+        hp=knights_config.get("red_knight").get("hp"),
+        armour=knights_config.get("red_knight").get("armour"),
+        weapon=knights_config.get("red_knight").get("weapon"),
+        potion=knights_config.get("red_knight").get("potion"),
+        protection=sum(
+            [protect.get("protection")
+             for protect in knights_config.get("red_knight").get("armour")]
+        )
+    )
+
+    for knight in Knight.instances:
+        # apply weapon
+        knight.apply_weapon()
+        # apply potion if exist
+        knight.apply_potion()
 
     # 1 Lancelot vs Mordred:
-    lancelot.hp -= mordred.power - lancelot.protection
-    mordred.hp -= lancelot.power - mordred.protection
-
-    # check if someone fell in battle
-    if lancelot.hp <= 0:
-        lancelot.hp = 0
-
-    if mordred.hp <= 0:
-        mordred.hp = 0
+    fight(lancelot, mordred)
 
     # 2 Arthur vs Red Knight:
-    arthur.hp -= red_knight.power - arthur.protection
-    red_knight.hp -= arthur.power - red_knight.protection
+    fight(arthur, red_knight)
 
-    # check if someone fell in battle
-    if arthur.hp <= 0:
-        arthur.hp = 0
-
-    if red_knight.hp <= 0:
-        red_knight.hp = 0
-
-    # Return battle results:
     return {
-        lancelot.name.title(): lancelot.hp,
-        arthur.name.title(): arthur.hp,
-        mordred.name.title(): mordred.hp,
-        red_knight.name.title(): red_knight.hp,
+        knights_config.get("lancelot").get("name"): lancelot.hp,
+        knights_config.get("arthur").get("name"): arthur.hp,
+        knights_config.get("mordred").get("name"): mordred.hp,
+        knights_config.get("red_knight").get("name"): red_knight.hp,
     }
 
 
 print(battle(KNIGHTS))
+

@@ -1,28 +1,35 @@
-from app.config.config import KNIGHTS
-from app.knights.knights import lancelot, mordred, arthur, red_knight
+from __future__ import annotations
 
 
-class ApplyWeapon:
-    @staticmethod
-    def apply_weapon() -> None:
-        lancelot.power += KNIGHTS.get("lancelot").get("weapon").get("power")
-        arthur.power += KNIGHTS.get("arthur").get("weapon").get("power")
-        mordred.power += KNIGHTS.get("mordred").get("weapon").get("power")
-        red_knight.power += (KNIGHTS.get("red_knight")
-                             .get("weapon").get("power"))
+class Knight:
+    instances = []
 
+    def __init__(self, name: str,
+                 power: int,
+                 hp: int,
+                 armour: list,
+                 weapon: dict,
+                 potion: dict = None,
+                 protection: int = 0
+                 ) -> None:
+        self.name = name
+        self.power = power
+        self.hp = hp
+        self.armour = armour
+        self.weapon = weapon
+        self.potion = potion
+        self.protection = protection
+        Knight.instances.append(self)
 
-class ApplyPotion:
-    @staticmethod
-    def apply_potion() -> None:
+    def apply_weapon(self) -> None:
+        self.power += self.weapon.get("power")
+
+    def apply_potion(self) -> None:
         # apply potion if exist
-        for knight in [lancelot, arthur, mordred, red_knight]:
-            if knight.potion is not None:
-                if knight.power in knight.potion.get("effect"):
-                    knight.power += (knight.potion.get("effect")
-                                     .get("power"))
-                if knight.protection in knight.potion.get("effect"):
-                    knight.protection += (knight.potion.
-                                          get("effect").get("protection"))
-                if knight.hp in knight.potion.get("effect"):
-                    knight.hp += knight.potion.get("effect").get("hp")
+        if self.potion is not None:
+            if "power" in self.potion.get("effect").keys():
+                self.power += (self.potion.get("effect").get("power"))
+            if "protection" in self.potion.get("effect").keys():
+                self.protection += (self.potion.get("effect").get("protection"))
+            if "hp" in self.potion.get("effect").keys():
+                self.hp = self.hp + self.potion.get("effect").get("hp")

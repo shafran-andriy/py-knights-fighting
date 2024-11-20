@@ -1,36 +1,11 @@
-from app.knights.knights import lancelot, mordred, arthur, red_knight
+from app.knights.battle_preparation import Knight
 
 
-# BATTLE:
-class Battle:
-    @staticmethod
-    def battle(knights_config: dict) -> dict:
-        # 1 Lancelot vs Mordred:
-        lancelot.hp -= mordred.power - lancelot.protection
-        mordred.hp -= lancelot.power - mordred.protection
-
-        # check if someone fell in battle
-        if lancelot.hp <= 0:
-            lancelot.hp = 0
-
-        if mordred.hp <= 0:
-            mordred.hp = 0
-
-        # 2 Arthur vs Red Knight:
-        arthur.hp -= red_knight.power - arthur.protection
-        red_knight.hp -= arthur.power - red_knight.protection
-
-        # check if someone fell in battle
-        if arthur.hp <= 0:
-            arthur.hp = 0
-
-        if red_knight.hp <= 0:
-            red_knight.hp = 0
-
-        # Return battle results:
-        return {
-            lancelot.name.title(): lancelot.hp,
-            arthur.name.title(): arthur.hp,
-            mordred.name.title(): mordred.hp,
-            red_knight.name.title(): red_knight.hp,
-        }
+def fight(knight1: Knight, knight2: Knight) -> None:
+    knight1.hp -= knight2.power - knight1.protection
+    knight2.hp -= knight1.power - knight2.protection
+    # check if someone fell in battle
+    if knight1.hp <= 0:
+        knight1.hp = 0
+    if knight2.hp <= 0:
+        knight2.hp = 0

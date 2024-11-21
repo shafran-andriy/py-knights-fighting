@@ -18,8 +18,11 @@ class Knight:
         self.armour = armour
         self.weapon = weapon
         self.potion = potion
-        self.protection = protection
+        self.protection = sum([protect.get("protection")
+                               for protect in self.armour])
         Knight.instances.append(self)
+        self.apply_weapon()
+        self.apply_potion()
 
     def apply_weapon(self) -> None:
         self.power += self.weapon.get("power")

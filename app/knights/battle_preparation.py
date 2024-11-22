@@ -2,7 +2,6 @@ from __future__ import annotations
 
 
 class Knight:
-    instances = []
 
     def __init__(self, name: str,
                  power: int,
@@ -20,7 +19,6 @@ class Knight:
         self.potion = potion
         self.protection = sum([protect.get("protection")
                                for protect in self.armour])
-        Knight.instances.append(self)
         self.apply_weapon()
         self.apply_potion()
 
@@ -30,12 +28,12 @@ class Knight:
     def apply_potion(self) -> None:
         # apply potion if exist
         if self.potion is not None:
-            if "power" in self.potion.get("effect").keys():
+            if "power" in self.potion.get("effect"):
                 self.power += (self.potion.get("effect")
                                .get("power"))
-            if "protection" in self.potion.get("effect").keys():
+            if "protection" in self.potion.get("effect"):
                 self.protection += (self.potion.get("effect")
                                     .get("protection"))
-            if "hp" in self.potion.get("effect").keys():
+            if "hp" in self.potion.get("effect"):
                 self.hp = (self.hp + self.potion.get("effect")
                            .get("hp"))
